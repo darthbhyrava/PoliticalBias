@@ -29,7 +29,7 @@ def writeToXml():
 				termPos[term]='"'+str(from_val)+'"'+' to='+'"'+str(from_val+len(term))+'"'
 				print term," ",termPos[term]
 		if "<aspectTerms>" in l:
-			newast+=l[0:22]
+			newast+=l[0:17]
 			#print sid
 			if sid!="":
 				aslist=asdict[sid]
@@ -41,7 +41,7 @@ def writeToXml():
 				towrite+=newast+"</aspectTerms>"
 				termPos={}
 		if "<aspectCategories>" in l:
-			newcat+=l[0:27]
+			newcat+=l[0:23]
 			if sid!="" and sid in cats_dict.keys():
 				catList=cats_dict[sid]
 				for cat in catList:
@@ -58,7 +58,7 @@ def writeToXml():
 						cat='ambience'
 					# add polarity
 					newcat+="<aspectCategory category="+'"'+cat+'"'+" polarity="+'"'+pola+'"'+"/>\n"
-				newcat+=l[27:]
+				newcat+=l[23:]
 				towrite+=newcat+"</aspectCategories>"
 		else:
 			if "</aspectTerms>" not in l and "<aspectTerms>" not in l and "</aspectCategories>" not in l:

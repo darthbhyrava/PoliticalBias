@@ -43,7 +43,7 @@ for key, value in users.items():
 	with open('./Results/{0}.xml'.format(num),'a+') as f:
 		for ind, sentence in enumerate(sentences):
 			sentence = re.sub(r'[^\x00-\x7F]+',' ', sentence).replace('\n',' ')
-			s = {'text': sentence.encode('utf-8'), 'aspectTerms':'', 'aspectCategories':''}
+			s = {'text': sentence.encode('utf-8'), 'aspectTerms':' ', 'aspectCategories':' '}
 			e = dict_to_xml('sentence',	 s)
 			e.set('id',str(ind))
 			writ = minidom.parseString(ET.tostring(e)).toprettyxml(indent="    ")

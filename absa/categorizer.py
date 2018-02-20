@@ -6,7 +6,7 @@ import pickle
 aspects=pickle.load(open('aspect_dump_new.p','rb'))
 #print aspects
 # l= [u'vodka', u'vodka', u'cocktail']
-list1=[u'food', u'ambience', u'price', u'anecdotes/miscellaneous', u'service']
+list1=[u'politics']
 cats_dict={}
 new_file={}
 for sid in aspects.keys():

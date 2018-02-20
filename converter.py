@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-
 import nltk
+import re
 import openpyxl
+from xml.dom import minidom
 import xml.etree.ElementTree as ET
 
 def dict_to_xml(tag, d):
@@ -39,10 +40,12 @@ for key, value in users.items():
 	num = index[key]
 	value = '\n'.join(value)
 	sentences = nltk.sent_tokenize(value)
-	with open('./Results/{0}.txt'.format(num),'a+') as f:
+	with open('./Results/{0}.xml'.format(num),'a+') as f:
 		for ind, sentence in enumerate(sentences):
-			s = {'text': sentence.encode('utf-8'), 'id': ind}
+			sentence = re.sub(r'[^\x00-\x7F]+',' ', sentence).replace('\n',' ')
+			s = {'text': sentence.encode('utf-8'), 'aspectTerms':'', 'aspectCategories':''}
 			e = dict_to_xml('sentence',	 s)
-			writ = ET.tostring(e)
+			e.set('id',str(ind))
+			writ = minidom.parseString(ET.tostring(e)).toprettyxml(indent="    ")
 			f.write(writ)
 		f.close()
